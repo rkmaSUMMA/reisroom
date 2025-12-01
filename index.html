@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reis Escaperoom – Surprise 🎁✈️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #020617;
+      --card: #0b1120;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.2);
+      --accent-strong: #16a34a;
+      --accent-2: #38bdf8;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --danger: #f97373;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.75);
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, #1d4ed8 0, transparent 45%),
+        radial-gradient(circle at bottom, #0f766e 0, transparent 40%),
+        var(--bg-soft);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 24px 18px 10px;
+    }
+
+    header.hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      letter-spacing: 0.04em;
+    }
+
+    header.hero .subtitle {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 540px;
+      margin-inline: auto;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--accent-2);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .hero-tag span.icon {
+      font-size: 1.05rem;
+    }
+
+    .progress-wrapper {
+      margin: 18px auto 8px;
+      max-width: 520px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .progress-bar-inner {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      transition: width 0.4s ease;
+    }
+
+    .intro {
+      max-width: 640px;
+      margin: 12px auto 18px;
+      padding: 14px 16px 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.94rem;
+    }
+
+    .intro ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+
+    .intro li {
+      margin: 2px 0;
+    }
+
+    .start-btn {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      color: #0b1120;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(8, 47, 73, 0.7);
+    }
+
+    .start-btn span.icon {
+      font-size: 1.1rem;
+    }
+
+    main {
+      margin-top: 24px;
+    }
+
+    .puzzle {
+      display: none;
+      margin-bottom: 26px;
+    }
+
+    .puzzle.visible {
+      display: block;
+    }
+
+    .puzzle-card {
+      background: rgba(15, 23, 42, 0.94);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .puzzle-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.16), transparent 55%),
+        radial-gradient(circle at 100% 120%, rgba(34, 197, 94, 0.15), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .puzzle-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .puzzle-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .puzzle-title {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .puzzle-number {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      color: var(--accent-2);
+    }
+
+    .puzzle-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .puzzle-body {
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .puzzle-body p {
+      margin: 8px 0;
+    }
+
+    .puzzle-body ol,
+    .puzzle-body ul {
+      padding-left: 20px;
+      margin: 6px 0 8px;
+    }
+
+    .puzzle-body li {
+      margin: 3px 0;
+    }
+
+    .hint-block {
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    .hint-block summary {
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.86rem;
+      color: var(--accent-2);
+    }
+
+    .hint-block summary::before {
+      content: "💡";
+      font-size: 0.9rem;
+    }
+
+    .hint-block[open] summary::after {
+      content: "–";
+      margin-left: auto;
+      font-weight: 700;
+    }
+
+    .hint-block:not([open]) summary::after {
+      content: "+";
+      margin-left: auto;
+      font-weight: 700;
+    }
+
+    .hint-block div {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .answer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    label.answer-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex: 1 1 180px;
+    }
+
+    .answer-input {
+      flex: 0 0 180px;
+      max-width: 240px;
+      position: relative;
+    }
+
+    .answer-input input {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 7px 12px;
+      font-size: 0.9rem;
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      outline: none;
+    }
+
+    .answer-input input:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
+    }
+
+    .answer-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 7px 14px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent-2);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .answer-btn:hover {
+      background: rgba(56, 189, 248, 0.32);
+    }
+
+    .answer-btn:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      min-height: 1.1em;
+    }
+
+    .feedback.success {
+      color: var(--accent);
+    }
+
+    .feedback.error {
+      color: var(--danger);
+    }
+
+    .puzzle.solved .puzzle-card {
+      border-color: var(--accent-strong);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5), var(--shadow-soft);
+    }
+
+    .puzzle.solved .puzzle-number {
+      background: var(--accent-soft);
+      border-color: var(--accent-strong);
+      color: var(--accent-strong);
+    }
+
+    .puzzle-meta {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .final-section {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .final-section.visible {
+      display: block;
+    }
+
+    .final-card {
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.4), rgba(15, 23, 42, 0.95));
+      border-radius: 22px;
+      padding: 22px 20px 24px;
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      box-shadow: 0 25px 50px rgba(22, 163, 74, 0.7);
+      text-align: center;
+    }
+
+    .final-title {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+    }
+
+    .final-text {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .final-code {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(34, 197, 94, 0.8);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .final-code span.code-text {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .final-note {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.76rem;
+      text-align: center;
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    @media (min-width: 700px) {
+      .puzzle-body-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+        gap: 12px 18px;
+        align-items: flex-start;
+      }
+
+      .puzzle-body-grid .right {
+        border-left: 1px solid rgba(148, 163, 184, 0.4);
+        padding-left: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-tag">
+        <span class="icon">🧩</span>
+        <span>Co-op reis-escaperoom</span>
+      </div>
+      <h1>Wereldreis & Winterberg – Surprise Escape</h1>
+      <p class="subtitle">
+        Twee spelers, één reisbureau, vijf veel te moeilijke puzzels. Los alles op om te ontdekken
+        waar de surprise verstopt ligt…
+      </p>
+    </header>
+
+    <div class="progress-wrapper">
+      <div class="progress-label">
+        <span>Voortgang</span>
+        <span id="progressText">0 / 5 puzzels opgelost</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progressBar" class="progress-bar-inner"></div>
+      </div>
+    </div>
+
+    <section class="intro">
+      <p>
+        Jullie hebben een geheimzinnige mail gekregen van het <strong>Intergalactisch Reisbureau van
+        Sinterklaas</strong>. De computer is gecrasht en alleen als jullie alle reisraadsels kraken,
+        toont het systeem waar de echte <strong>surprise</strong> ligt.
+      </p>
+      <p>
+        Speel bij voorkeur met twee personen:
+      </p>
+      <ul>
+        <li><strong>Speler A</strong> – de wereldreiziger 🌍 (dol op verre bestemmingen)</li>
+        <li><strong>Speler B</strong> – de Winterberg-/Hesborn-fan 🏔️ (houdt van sneeuw en Sauerland)</li>
+      </ul>
+      <p>
+        Jullie mogen alles opzoeken op internet: kaarten, vluchten, coördinaten, hoogtes, gerechten…
+        Een rekenmachine is <em>sterk</em> aanbevolen 😉
+      </p>
+      <button class="start-btn" type="button" onclick="startGame()">
+        <span class="icon">▶️</span><span>Begin met Puzzel 1</span>
+      </button>
+    </section>
+
+    <main>
+      <!-- PUZZEL 1 -->
+      <section id="puzzle1" class="puzzle">
+        <div class="puzzle-card">
+          <div class="puzzle-inner">
+            <div class="puzzle-header">
+              <div class="puzzle-title">
+                <span class="puzzle-number">1</span>
+                <span>Puzzel 1 – 250 kilometer naar het zuiden</span>
+              </div>
+              <div class="puzzle-tag">Geografie • Winterberg → Europa</div>
+            </div>
+            <div class="puzzle-body">
+              <div class="puzzle-body-grid">
+                <div class="left">
+                  <p>
+                    Van jullie huis naar <strong>Winterberg</strong> is ongeveer
+                    <strong>250 km</strong> rijden. In deze puzzel schuif je die afstand als het ware
+                    recht naar het zuiden over de kaart.
+                  </p>
+                  <ol>
+                    <li>
+                      Zoek de <strong>breedtegraad</strong> (latitude in graden) van
+                      <strong>Winterberg, Duitsland</strong>.
+                    </li>
+                    <li>
+                      Zoek op hoeveel kilometer ongeveer overeenkomt met
+                      <strong>1° breedtegraad</strong> (noord–zuid). Tip: het is ongeveer 111 km.
+                    </li>
+                    <li>
+                      Reken uit: hoeveel graden breedte is 250 km? (deel 250 door het aantal km per
+                      graad).
+                    </li>
+                    <li>
+                      Trek dat aantal graden af van de breedtegraad van Winterberg. Je komt uit op
+                      een breedtegraad ergens net onder de 50° N.
+                    </li>
+                    <li>
+                      Zoek de breedtegraad van de volgende grote Europese steden en vergelijk:
+                      <ul>
+                        <li>Parijs</li>
+                        <li>Madrid</li>
+                        <li>Rome</li>
+                        <li>Oslo</li>
+                      </ul>
+                      Welke ligt het dichtst bij jouw uitgerekende breedtegraad?
+                    </li>
+                  </ol>
+                </div>
+                <div class="right">
+                  <p class="puzzle-meta">
+                    <strong>Doel:</strong> bepaal welke grote Europese stad je ongeveer bereikt als je
+                    250 km zuidwaarts “verschuift” vanaf Winterberg.
+                  </p>
+                  <details class="hint-block">
+                    <summary>Hint nodig?</summary>
+                    <div>
+                      <p>
+                        Winterberg ligt iets boven 51° N. 250 km is net iets meer dan 2° aan
+                        breedte. Je eindigt dus rond 49° N. Kijk welke stad daar het dichtst bij
+                        ligt.
+                      </p>
+                    </div>
+                  </details>
+                  <div class="answer-row">
+                    <label class="answer-label" for="answer1">
+                      Vul de naam in van de <strong>stad</strong> die er het dichtst bij ligt:
+                    </label>
+                    <div class="answer-input">
+                      <input id="answer1" type="text" autocomplete="off"
+                             placeholder="bijv. Parijs" />
+                    </div>
+                    <button class="answer-btn" type="button" onclick="checkPuzzle(1)">
+                      Controleer
+                    </button>
+                  </div>
+                  <p id="feedback1" class="feedback"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUZZEL 2 -->
+      <section id="puzzle2" class="puzzle">
+        <div class="puzzle-card">
+          <div class="puzzle-inner">
+            <div class="puzzle-header">
+              <div class="puzzle-title">
+                <span class="puzzle-number">2</span>
+                <span>Puzzel 2 – Winterberg-index & Grieks comfort food</span>
+              </div>
+              <div class="puzzle-tag">Vluchten • Ratio’s • Eten</div>
+            </div>
+            <div class="puzzle-body">
+              <p>
+                De rit naar Winterberg is nu onze eenheid: <strong>1 W</strong> (ongeveer 250 km).
+                Stel dat je diezelfde afstandsmaat gebruikt om vliegafstanden te vergelijken.
+              </p>
+              <ol>
+                <li>
+                  Zoek de <strong>vluchtafstand in kilometers</strong> vanaf Schiphol (Amsterdam)
+                  naar:
+                  <ul>
+                    <li>Helsinki</li>
+                    <li>Athene</li>
+                    <li>Kaapstad</li>
+                  </ul>
+                  Gebruik een site met “air distance / flight distance”.
+                </li>
+                <li>
+                  Reken per stad uit:
+                  <br />
+                  <code>Winterberg-index = afstand (km) / 250</code>
+                  <br />
+                  Rond af op <strong>één decimaal</strong> (bijv. 6,1 W).
+                </li>
+                <li>
+                  Sorteer de drie steden op Winterberg-index van <strong>klein naar groot</strong>.
+                  Neem de stad die in het <strong>midden</strong> staat (de “middelste” index).
+                </li>
+                <li>
+                  Zoek nu een klassiek <strong>ovengerecht</strong> uit dat land, opgebouwd uit
+                  aubergine, gehakt en een dikke laag bechamelsaus.
+                </li>
+                <li>
+                  Schrijf de <strong>Nederlandse naam</strong> van dat gerecht op (zonder spaties).
+                  Tel hoeveel letters het woord heeft en zet dat getal om naar een
+                  <strong>letter</strong> (1 = A, 2 = B, …, 8 = H, etc.). Die letter heb je later
+                  nog nodig.
+                </li>
+              </ol>
+              <details class="hint-block">
+                <summary>Hint nodig?</summary>
+                <div>
+                  <p>
+                    De middelste Winterberg-index hoort bij een stad in een land met veel
+                    ovengerechten. Het gezochte gerecht lijkt op een laagjes-lasagne met aubergine
+                    in plaats van pasta.
+                  </p>
+                </div>
+              </details>
+              <div class="answer-row">
+                <label class="answer-label" for="answer2">
+                  Vul de naam in van de <strong>stad</strong> die in het
+                  <strong>midden</strong> uitkomt:
+                </label>
+                <div class="answer-input">
+                  <input id="answer2" type="text" autocomplete="off"
+                         placeholder="bijv. Athene" />
+                </div>
+                <button class="answer-btn" type="button" onclick="checkPuzzle(2)">
+                  Controleer
+                </button>
+              </div>
+              <p id="feedback2" class="feedback"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUZZEL 3 -->
+      <section id="puzzle3" class="puzzle">
+        <div class="puzzle-card">
+          <div class="puzzle-inner">
+            <div class="puzzle-header">
+              <div class="puzzle-title">
+                <span class="puzzle-number">3</span>
+                <span>Puzzel 3 – Hoogteverschillen rond Winterberg</span>
+              </div>
+              <div class="puzzle-tag">Hoogte • Andes • Landcode</div>
+            </div>
+            <div class="puzzle-body">
+              <p>
+                Winterberg voelt misschien hoog, maar hoe hoog is het vergeleken met de Andes?
+              </p>
+              <ol>
+                <li>
+                  Zoek de <strong>hoogte boven zeeniveau (in meters)</strong> van:
+                  <ul>
+                    <li><strong>Kahler Asten</strong> (de bekende berg bij Winterberg)</li>
+                    <li><strong>Hesborn</strong> (dorp bij Hallenberg, in het Sauerland)</li>
+                    <li><strong>Quito</strong> (hoofdstad van Ecuador, in de Andes)</li>
+                  </ul>
+                  Gebruik voor Hesborn een hoogte rond <strong>480 m</strong> als richtwaarde.
+                </li>
+                <li>
+                  Noem de hoogtes respectievelijk <code>K</code>, <code>H</code> en <code>Q</code>.
+                  Bereken:
+                  <ul>
+                    <li><code>A = Q - K</code> (hoeveel hoger ligt Quito dan Kahler Asten?)</li>
+                    <li><code>B = K - H</code> (hoeveel hoger is de berg dan het dorp?)</li>
+                  </ul>
+                </li>
+                <li>
+                  Tel de verschillen op: <code>S = A + B</code>. Dit is het totale verschil
+                  tussen Quito en Hesborn via de tussenstop op Kahler Asten.
+                </li>
+                <li>
+                  Zet <code>S</code> om naar <strong>kilometers</strong> (deel door 1000) en rond af
+                  op <strong>één decimaal</strong>.
+                </li>
+                <li>
+                  Schrijf dat getal zonder komma op. Voorbeeld: 2,4 km → schrijf <code>24</code>.
+                  Splits het in twee cijfers (2 en 4) en zet elk cijfer om naar een letter (1=A,
+                  2=B, 3=C, …).
+                </li>
+                <li>
+                  De twee letters vormen samen een <strong>landcode</strong> (denk aan
+                  kentekenplaten / internetdomeinen). Welk land hoort daarbij?
+                </li>
+              </ol>
+              <details class="hint-block">
+                <summary>Hint nodig?</summary>
+                <div>
+                  <p>
+                    De hoofdstad van Ecuador ligt rond de 2800–2900 meter hoog. Je totale
+                    hoogteverschil komt uit op iets meer dan 2 kilometer.
+                  </p>
+                </div>
+              </details>
+              <div class="answer-row">
+                <label class="answer-label" for="answer3">
+                  Welk <strong>land</strong> hoort bij de uiteindelijke tweelettercode?
+                </label>
+                <div class="answer-input">
+                  <input id="answer3" type="text" autocomplete="off"
+                         placeholder="bijv. Bangladesh" />
+                </div>
+                <button class="answer-btn" type="button" onclick="checkPuzzle(3)">
+                  Controleer
+                </button>
+              </div>
+              <p id="feedback3" class="feedback"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUZZEL 4 -->
+      <section id="puzzle4" class="puzzle">
+        <div class="puzzle-card">
+          <div class="puzzle-inner">
+            <div class="puzzle-header">
+              <div class="puzzle-title">
+                <span class="puzzle-number">4</span>
+                <span>Puzzel 4 – Breedsmaakgraad</span>
+              </div>
+              <div class="puzzle-tag">Streetfood • Breedtegraad • Winterberg</div>
+            </div>
+            <div class="puzzle-body">
+              <p>
+                Je reist met je smaakpapillen rond de wereld. Elk gerecht hoort sterk bij een
+                stad. Jij combineert dat met de breedtegraad van Winterberg.
+              </p>
+              <ol>
+                <li>
+                  Koppel deze beschrijvingen aan bekende gerechten en steden:
+                  <ul>
+                    <li>
+                      Een kom dampende noedelsoep in hartige bouillon, nu bijna een nationaal
+                      gerecht van Japan → <strong>ramen</strong> in <strong>Tokyo</strong>.
+                    </li>
+                    <li>
+                      Een stoofpot van zwarte bonen met varkens- en rundvlees, nationaal gerecht
+                      van Brazilië → <strong>feijoada</strong> in <strong>Rio de Janeiro</strong>.
+                    </li>
+                    <li>
+                      Friet met kaas “curds” en bruine jus, ontstaan in Quebec → <strong>poutine</strong>
+                      in <strong>Montreal</strong>.
+                    </li>
+                    <li>
+                      In stukken gesneden worst met curryketchup, hét straateten in een Duitse
+                      hoofdstad → <strong>currywurst</strong> in <strong>Berlijn</strong>.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Zoek de <strong>breedtegraad</strong> van:
+                  <ul>
+                    <li>Winterberg</li>
+                    <li>Tokyo</li>
+                    <li>Rio de Janeiro</li>
+                    <li>Montreal</li>
+                    <li>Berlijn</li>
+                  </ul>
+                </li>
+                <li>
+                  Bereken per stad het <strong>absolute verschil</strong> in breedtegraad met
+                  Winterberg (denk eraan: zuidelijke breedtegraden eerst negatief maken).
+                </li>
+                <li>
+                  Bepaal welke stad qua breedtegraad het <strong>dichtst bij Winterberg</strong>
+                  ligt.
+                </li>
+                <li>
+                  Vul de naam in van het <strong>gerecht</strong> uit die stad.
+                </li>
+              </ol>
+              <details class="hint-block">
+                <summary>Hint nodig?</summary>
+                <div>
+                  <p>
+                    Winterberg ligt iets boven 51° N. Eén van de steden ligt maar ongeveer 1°
+                    daarvandaan en ligt ook in Duitsland.
+                  </p>
+                </div>
+              </details>
+              <div class="answer-row">
+                <label class="answer-label" for="answer4">
+                  Welk <strong>gerecht</strong> hoort bij de stad die het dichtst bij Winterberg
+                  ligt?
+                </label>
+                <div class="answer-input">
+                  <input id="answer4" type="text" autocomplete="off"
+                         placeholder="bijv. currywurst" />
+                </div>
+                <button class="answer-btn" type="button" onclick="checkPuzzle(4)">
+                  Controleer
+                </button>
+              </div>
+              <p id="feedback4" class="feedback"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUZZEL 5 -->
+      <section id="puzzle5" class="puzzle">
+        <div class="puzzle-card">
+          <div class="puzzle-inner">
+            <div class="puzzle-header">
+              <div class="puzzle-title">
+                <span class="puzzle-number">5</span>
+                <span>Puzzel 5 – Landoppervlak-menu</span>
+              </div>
+              <div class="puzzle-tag">Eten • Oppervlakte • Rekenen</div>
+            </div>
+            <div class="puzzle-body">
+              <p>
+                We sluiten af met een gerechtenduel tussen Spanje, Italië en Marokko, gekoppeld
+                aan de 250 km naar Winterberg.
+              </p>
+              <ol>
+                <li>
+                  Herken de gerechten en landen:
+                  <ul>
+                    <li>
+                      Een rijstgerecht met saffraan en zeevruchten, beroemd uit de regio Valencia
+                      → <strong>paella</strong> uit <strong>Spanje</strong>.
+                    </li>
+                    <li>
+                      Een ronde pizza met tomaat, mozzarella en basilicum, klassiek uit Napels →
+                      <strong>pizza margherita</strong> uit <strong>Italië</strong>.
+                    </li>
+                    <li>
+                      Een langzaam gegaarde stoofschotel in een kegelvormige aardewerken pot →
+                      <strong>tajine</strong> uit <strong>Marokko</strong>.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Zoek de <strong>landoppervlakte</strong> (in km², afgerond) van:
+                  <ul>
+                    <li>Spanje (≈ 505.000 km²)</li>
+                    <li>Italië (≈ 301.000 km²)</li>
+                    <li>Marokko (≈ 446.000 km²)</li>
+                  </ul>
+                </li>
+                <li>
+                  Deel voor elk land de oppervlakte door <strong>250</strong>
+                  (de Winterberg-afstand in km):
+                  <br />
+                  <code>aantal = oppervlakte / 250</code>
+                </li>
+                <li>
+                  Kijk bij welk land de uitkomst het <strong>dichtst bij een mooi heel getal</strong>
+                  ligt (en in de praktijk ook echt bijna exact een heel getal is).
+                </li>
+                <li>
+                  Vul de naam in van het <strong>gerecht</strong> dat bij dat land hoort.
+                </li>
+              </ol>
+              <details class="hint-block">
+                <summary>Hint nodig?</summary>
+                <div>
+                  <p>
+                    Eén van de landen komt heel netjes uit op iets als 2020 als je door 250 deelt.
+                    Dat is wel erg “rond” voor een puzzel...
+                  </p>
+                </div>
+              </details>
+              <div class="answer-row">
+                <label class="answer-label" for="answer5">
+                  Welk <strong>gerecht</strong> hoort bij het land met de “mooiste” deling?
+                </label>
+                <div class="answer-input">
+                  <input id="answer5" type="text" autocomplete="off"
+                         placeholder="bijv. paella" />
+                </div>
+                <button class="answer-btn" type="button" onclick="checkPuzzle(5)">
+                  Controleer
+                </button>
+              </div>
+              <p id="feedback5" class="feedback"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINALE -->
+      <section id="final" class="final-section">
+        <div class="final-card">
+          <h2 class="final-title">🎉 Alle puzzels gekraakt!</h2>
+          <p class="final-text">
+            Het systeem van het Reisbureau is hersteld. De laatste regel op het scherm toont
+            precies waar de surprise verstopt is…
+          </p>
+          <div class="final-code">
+            <span>📍</span>
+            <span class="code-text">KIJK ONDER DE BANK</span>
+          </div>
+          <p class="final-note">
+            (Ja echt. Sta op, loop erheen, en kijk goed. Sinterklaas heeft daar iets achtergelaten.)
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Tip: als je dit via GitHub Pages host, kun je de URL in een “mysterieuze mail van het
+      Reisbureau van Sinterklaas” zetten.
+    </footer>
+  </div>
+
+  <script>
+    const totalPuzzles = 5;
+    const solved = { 1: false, 2: false, 3: false, 4: false, 5: false };
+
+    function normalize(str) {
+      return (str || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, ""); // verwijder accenten
+    }
+
+    function startGame() {
+      const first = document.getElementById("puzzle1");
+      if (first && !first.classList.contains("visible")) {
+        first.classList.add("visible");
+        first.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function updateProgress() {
+      const solvedCount = Object.values(solved).filter(Boolean).length;
+      const percentage = (solvedCount / totalPuzzles) * 100;
+      const bar = document.getElementById("progressBar");
+      const text = document.getElementById("progressText");
+      if (bar) bar.style.width = percentage + "%";
+      if (text) text.textContent = `${solvedCount} / ${totalPuzzles} puzzels opgelost`;
+
+      if (solvedCount === totalPuzzles) {
+        const finalSection = document.getElementById("final");
+        if (finalSection && !finalSection.classList.contains("visible")) {
+          finalSection.classList.add("visible");
+          setTimeout(() => {
+            finalSection.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 250);
+        }
+      }
+    }
+
+    function lockPuzzleInputs(nr) {
+      const puzzle = document.getElementById("puzzle" + nr);
+      if (!puzzle) return;
+      const input = puzzle.querySelector("input");
+      const button = puzzle.querySelector("button.answer-btn");
+      if (input) input.disabled = true;
+      if (button) button.disabled = true;
+      puzzle.classList.add("solved");
+    }
+
+    function showNextPuzzle(nr) {
+      const nxt = document.getElementById("puzzle" + nr);
+      if (nxt && !nxt.classList.contains("visible")) {
+        nxt.classList.add("visible");
+        setTimeout(() => {
+          nxt.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 220);
+      }
+    }
+
+    function checkPuzzle(nr) {
+      const inputEl = document.getElementById("answer" + nr);
+      const feedbackEl = document.getElementById("feedback" + nr);
+      if (!inputEl || !feedbackEl) return;
+
+      const answerRaw = inputEl.value;
+      const ans = normalize(answerRaw);
+
+      let correct = false;
+      let successMsg = "";
+      let errorMsg = "";
+
+      switch (nr) {
+        case 1: {
+          // Parijs / Paris
+          if (ans === "parijs" || ans === "paris") {
+            correct = true;
+            successMsg =
+              "✔ Klopt: rond 49° noorderbreedte beland je het dichtst bij Parijs.";
+          } else {
+            errorMsg =
+              "✖ Nog niet. Controleer je berekening van de breedtegraad en vergelijk de steden nog eens.";
+          }
+          break;
+        }
+        case 2: {
+          // Athene / Athens
+          if (ans === "athene" || ans === "athens") {
+            correct = true;
+            successMsg =
+              "✔ Goed gerekend: de middelste Winterberg-index hoort bij Athene (met o.a. moussaka).";
+          } else {
+            errorMsg =
+              "✖ Nog niet. Kijk goed naar de verhoudingen afstand/250 km en sorteer ze van klein naar groot.";
+          }
+          break;
+        }
+        case 3: {
+          // Bangladesh / BD
+          if (ans === "bangladesh" || ans === "bd") {
+            correct = true;
+            successMsg =
+              "✔ Juist: de berekening leidt tot de landcode BD, die hoort bij Bangladesh.";
+          } else {
+            errorMsg =
+              "✖ Nog niet. Controleer je hoogtes en afronding naar kilometers (en denk aan landcodes).";
+          }
+          break;
+        }
+        case 4: {
+          // Currywurst
+          const compact = ans.replace(/\s+/g, "");
+          if (compact === "currywurst") {
+            correct = true;
+            successMsg =
+              "✔ Precies: qua breedtegraad ligt Berlijn het dichtst bij Winterberg – dus het juiste gerecht is currywurst.";
+          } else {
+            errorMsg =
+              "✖ Nog niet. Bepaal per stad het verschil in breedtegraad met Winterberg en kies dan het gerecht bij de dichtstbijzijnde stad.";
+          }
+          break;
+        }
+        case 5: {
+          // Paella
+          if (ans === "paella") {
+            correct = true;
+            successMsg =
+              "✔ Mooi gezien: Spanje geeft een bijna perfecte deling door 250, dus het juiste gerecht is paella.";
+          } else {
+            errorMsg =
+              "✖ Nog niet. Deel de landoppervlakken door 250 en kijk welk land het ‘netst’ uitkomt.";
+          }
+          break;
+        }
+      }
+
+      if (correct) {
+        feedbackEl.textContent = successMsg;
+        feedbackEl.classList.remove("error");
+        feedbackEl.classList.add("success");
+        if (!solved[nr]) {
+          solved[nr] = true;
+          lockPuzzleInputs(nr);
+          updateProgress();
+          if (nr < totalPuzzles) {
+            showNextPuzzle(nr + 1);
+          }
+        }
+      } else {
+        feedbackEl.textContent = errorMsg;
+        feedbackEl.classList.remove("success");
+        feedbackEl.classList.add("error");
+      }
+    }
+
+    // optioneel: start puzzel 1 automatisch als JS aanstaat
+    document.addEventListener("DOMContentLoaded", () => {
+      updateProgress();
+    });
+  </script>
+</body>
+</html>
