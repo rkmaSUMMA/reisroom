@@ -1370,21 +1370,87 @@ const p2Landmarks = [
   }
 
   /* Puzzel 3 – Duitse gerechten */
-  const p3Dishes = [
-    {id:"bratwurst",  name:"Bratwurst",  src:"images/p3_de_bratwurst.jpg",  letter:"H"},
-    {id:"schnitzel",  name:"Schnitzel",  src:"images/p3_de_schnitzel.jpg",  letter:"O"},
-    {id:"currywurst", name:"Currywurst", src:"images/p3_de_currywurst.jpg", letter:"C"},
-    {id:"sauerbraten",name:"Sauerbraten",src:"images/p3_de_sauerbraten.jpg",letter:"H"},
-    {id:"kaesespaetzle",name:"Käsespätzle",src:"images/p3_de_kaesespaetzle.jpg",letter:"S"},
-    {id:"schweinhaxe",name:"Schweinshaxe",src:"images/p3_de_schweinhaxe.jpg",letter:"A"},
-    {id:"maultaschen",name:"Maultaschen",src:"images/p3_de_maultaschen.jpg",letter:"U"},
-    {id:"kartoffelsalat",name:"Kartoffelsalat",src:"images/p3_de_kartoffelsalat.jpg",letter:"E"},
-    {id:"weisswurst",name:"Weißwurst",src:"images/p3_de_weisswurst.jpg",letter:"R"},
-    {id:"rouladen",name:"Rouladen",src:"images/p3_de_rouladen.jpg",letter:"L"},
-    {id:"schwarzwalder",name:"Schwarzwälder Kirschtorte",src:"images/p3_de_schwarzwalder.jpg",letter:"A"},
-    {id:"apfelstrudel",name:"Apfelstrudel",src:"images/p3_de_apfelstrudel.jpg",letter:"N"},
-    {id:"lebkuchen",name:"Lebkuchen",src:"images/p3_de_lebkuchen.jpg",letter:"D"}
-  ];
+const p3Dishes = [
+  {
+    id: "bratwurst",
+    name: "Bratwurst",
+    src: "https://source.unsplash.com/featured/?bratwurst,german-sausage",
+    letter: "H"
+  },
+  {
+    id: "schnitzel",
+    name: "Schnitzel",
+    src: "https://source.unsplash.com/featured/?schnitzel,german-food",
+    letter: "O"
+  },
+  {
+    id: "currywurst",
+    name: "Currywurst",
+    src: "https://source.unsplash.com/featured/?currywurst,german-street-food",
+    letter: "C"
+  },
+  {
+    id: "sauerbraten",
+    name: "Sauerbraten",
+    src: "https://source.unsplash.com/featured/?sauerbraten,german-roast",
+    letter: "H"
+  },
+  {
+    id: "kaesespaetzle",
+    name: "Käsespätzle",
+    src: "https://source.unsplash.com/featured/?käsespätzle,spaetzle,cheese-pasta",
+    letter: "S"
+  },
+  {
+    id: "schweinhaxe",
+    name: "Schweinshaxe",
+    src: "https://source.unsplash.com/featured/?schweinehaxe,pork-knuckle,german-food",
+    letter: "A"
+  },
+  {
+    id: "maultaschen",
+    name: "Maultaschen",
+    src: "https://source.unsplash.com/featured/?maultaschen,german-dumplings",
+    letter: "U"
+  },
+  {
+    id: "kartoffelsalat",
+    name: "Kartoffelsalat",
+    src: "https://source.unsplash.com/featured/?kartoffelsalat,german-potato-salad",
+    letter: "E"
+  },
+  {
+    id: "weisswurst",
+    name: "Weißwurst",
+    src: "https://source.unsplash.com/featured/?weisswurst,white-sausage,german-breakfast",
+    letter: "R"
+  },
+  {
+    id: "rouladen",
+    name: "Rouladen",
+    src: "https://source.unsplash.com/featured/?rouladen,german-beef-roll",
+    letter: "L"
+  },
+  {
+    id: "schwarzwalder",
+    name: "Schwarzwälder Kirschtorte",
+    src: "https://source.unsplash.com/featured/?black-forest-cake,schwarzwälder-kirschtorte",
+    letter: "A"
+  },
+  {
+    id: "apfelstrudel",
+    name: "Apfelstrudel",
+    src: "https://source.unsplash.com/featured/?apfelstrudel,apple-strudel",
+    letter: "N"
+  },
+  {
+    id: "lebkuchen",
+    name: "Lebkuchen",
+    src: "https://source.unsplash.com/featured/?lebkuchen,german-gingerbread",
+    letter: "D"
+  }
+];
+
   let p3SolvedCount = 0;
   const p3LettersCollected = [];
 
