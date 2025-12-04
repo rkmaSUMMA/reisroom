@@ -1156,16 +1156,79 @@ const p1Photos = [
   }
 
   /* Puzzel 2 data – landmarks */
-  const p2Landmarks = [
-    {id:"l1", src:"images/p2_landmark01.jpg", countryKey:"usa", accepted:["verenigde staten","vs","usa","united states","united states of america"], letter:"B"},
-    {id:"l2", src:"images/p2_landmark02.jpg", countryKey:"france", accepted:["frankrijk","france"], letter:"R"},
-    {id:"l3", src:"images/p2_landmark03.jpg", countryKey:"italy", accepted:["italie","itali","italy"], letter:"A"},
-    {id:"l4", src:"images/p2_landmark04.jpg", countryKey:"china", accepted:["china","prc"], letter:"Z"},
-    {id:"l5", src:"images/p2_landmark05.jpg", countryKey:"australia", accepted:["australie","australia"], letter:"I"},
-    {id:"l6", src:"images/p2_landmark06.jpg", countryKey:"egypt", accepted:["egypte","egypt"], letter:"L"},
-    {id:"l7", src:"images/p2_landmark07.jpg", countryKey:"india", accepted:["india"], letter:"I"},
-    {id:"l8", src:"images/p2_landmark08.jpg", countryKey:"brazil", accepted:["brazilie","brazil","brasil","brasilie"], letter:"E"}
-  ];
+const p2Landmarks = [
+  // l1 – Antelope Canyon, Arizona (USA)
+  {
+    id: "l1",
+    src: "https://upload.wikimedia.org/wikipedia/commons/7/7c/USA_10096-7-8_HDR_Antelope_Canyon_Luca_Galuzzi_2007.jpg",
+    countryKey: "usa",
+    accepted: ["verenigde staten","vs","usa","united states","united states of america"],
+    letter: "B"
+  },
+
+  // l2 – Mont Saint-Michel, Normandië (Frankrijk)
+  {
+    id: "l2",
+    src: "https://upload.wikimedia.org/wikipedia/commons/d/d0/GSmulders_MtStMichel2.jpg",
+    countryKey: "france",
+    accepted: ["frankrijk","france"],
+    letter: "R"
+  },
+
+  // l3 – Kasteel van Riomaggiore, Cinque Terre (Italië)
+  {
+    id: "l3",
+    src: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Riomaggiore_038.jpg",
+    countryKey: "italy",
+    accepted: ["italie","itali","italy"],
+    letter: "A"
+  },
+
+  // l4 – Zhangjiajie National Forest Park (China)
+  {
+    id: "l4",
+    src: "https://upload.wikimedia.org/wikipedia/commons/7/77/1_tianzishan_wulingyuan_zhangjiajie_2012.jpg",
+    countryKey: "china",
+    accepted: ["china","prc"],
+    letter: "Z"
+  },
+
+  // l5 – Twelve Apostles, Great Ocean Road (Australië)
+  {
+    id: "l5",
+    src: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Twelve-apostles.jpg",
+    countryKey: "australia",
+    accepted: ["australie","australia"],
+    letter: "I"
+  },
+
+  // l6 – Abu Simbel tempelcomplex (Egypte)
+  {
+    id: "l6",
+    src: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Gro%C3%9Fer_Tempel_%28Abu_Simbel%29_06.jpg",
+    countryKey: "egypt",
+    accepted: ["egypte","egypt"],
+    letter: "L"
+  },
+
+  // l7 – Hawa Mahal, Jaipur (India)
+  {
+    id: "l7",
+    src: "https://upload.wikimedia.org/wikipedia/commons/3/37/Hawa_Mahal_2011.jpg",
+    countryKey: "india",
+    accepted: ["india"],
+    letter: "I"
+  },
+
+  // l8 – Pelourinho, historisch centrum Salvador (Brazilië)
+  {
+    id: "l8",
+    src: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Pelourinho_Salvador_Bahia_2018-0608.jpg",
+    countryKey: "brazil",
+    accepted: ["brazilie","brazil","brasil","brasilie"],
+    letter: "E"
+  }
+];
 
   function renderPuzzle2() {
     const grid = document.getElementById("p2-grid");
