@@ -1508,21 +1508,113 @@ const p3Dishes = [
   }
 
   /* Puzzel 4 – wereldgerechten */
-  const p4Items = [
-    {id:"feijoada", dish:"Feijoada", countryId:"brazil", countryLabel:"Brazilië", src:"images/p4_feijoada.jpg", letter:"L"},
-    {id:"ramen", dish:"Ramen", countryId:"japan", countryLabel:"Japan", src:"images/p4_ramen.jpg", letter:"I"},
-    {id:"paella", dish:"Paella", countryId:"spain", countryLabel:"Spanje", src:"images/p4_paella.jpg", letter:"E"},
-    {id:"poutine", dish:"Poutine", countryId:"canada", countryLabel:"Canada", src:"images/p4_poutine.jpg", letter:"C"},
-    {id:"tajine", dish:"Tajine", countryId:"morocco", countryLabel:"Marokko", src:"images/p4_tajine.jpg", letter:"H"},
-    {id:"pho", dish:"Pho", countryId:"vietnam", countryLabel:"Vietnam", src:"images/p4_pho.jpg", letter:"T"},
-    {id:"bibimbap", dish:"Bibimbap", countryId:"southkorea", countryLabel:"Zuid-Korea", src:"images/p4_bibimbap.jpg", letter:"E"},
-    {id:"biryani", dish:"Biryani", countryId:"india", countryLabel:"India", src:"images/p4_biryani.jpg", letter:"N"},
-    {id:"moussaka", dish:"Moussaka", countryId:"greece", countryLabel:"Griekenland", src:"images/p4_moussaka.jpg", letter:"S"},
-    {id:"fishchips", dish:"Fish & chips", countryId:"uk", countryLabel:"Verenigd Koninkrijk", src:"images/p4_fishchips.jpg", letter:"T"},
-    {id:"tacos", dish:"Taco's", countryId:"mexico", countryLabel:"Mexico", src:"images/p4_tacos.jpg", letter:"E"},
-    {id:"fondue", dish:"Fondue", countryId:"switzerland", countryLabel:"Zwitserland", src:"images/p4_fondue.jpg", letter:"I"},
-    {id:"goulash", dish:"Goulash", countryId:"hungary", countryLabel:"Hongarije", src:"images/p4_goulash.jpg", letter:"N"}
-  ];
+const p4Items = [
+  {
+    id: "feijoada",
+    dish: "Feijoada",
+    countryId: "brazil",
+    countryLabel: "Brazilië",
+    src: "https://loremflickr.com/640/480/feijoada,brazil,food",
+    letter: "L"
+  },
+  {
+    id: "ramen",
+    dish: "Ramen",
+    countryId: "japan",
+    countryLabel: "Japan",
+    src: "https://loremflickr.com/640/480/ramen,japan,noodles",
+    letter: "I"
+  },
+  {
+    id: "paella",
+    dish: "Paella",
+    countryId: "spain",
+    countryLabel: "Spanje",
+    src: "https://loremflickr.com/640/480/paella,spain,seafood",
+    letter: "E"
+  },
+  {
+    id: "poutine",
+    dish: "Poutine",
+    countryId: "canada",
+    countryLabel: "Canada",
+    src: "https://loremflickr.com/640/480/poutine,canada,fries",
+    letter: "C"
+  },
+  {
+    id: "tajine",
+    dish: "Tajine",
+    countryId: "morocco",
+    countryLabel: "Marokko",
+    src: "https://loremflickr.com/640/480/tagine,morocco,food",
+    letter: "H"
+  },
+  {
+    id: "pho",
+    dish: "Pho",
+    countryId: "vietnam",
+    countryLabel: "Vietnam",
+    src: "https://loremflickr.com/640/480/pho,vietnam,noodles",
+    letter: "T"
+  },
+  {
+    id: "bibimbap",
+    dish: "Bibimbap",
+    countryId: "southkorea",
+    countryLabel: "Zuid-Korea",
+    src: "https://loremflickr.com/640/480/bibimbap,korea,food",
+    letter: "E"
+  },
+  {
+    id: "biryani",
+    dish: "Biryani",
+    countryId: "india",
+    countryLabel: "India",
+    src: "https://loremflickr.com/640/480/biryani,india,rice",
+    letter: "N"
+  },
+  {
+    id: "moussaka",
+    dish: "Moussaka",
+    countryId: "greece",
+    countryLabel: "Griekenland",
+    src: "https://loremflickr.com/640/480/moussaka,greece,food",
+    letter: "S"
+  },
+  {
+    id: "fishchips",
+    dish: "Fish & chips",
+    countryId: "uk",
+    countryLabel: "Verenigd Koninkrijk",
+    src: "https://loremflickr.com/640/480/fish-and-chips,uk,food",
+    letter: "T"
+  },
+  {
+    id: "tacos",
+    dish: "Taco's",
+    countryId: "mexico",
+    countryLabel: "Mexico",
+    src: "https://loremflickr.com/640/480/tacos,mexico,food",
+    letter: "E"
+  },
+  {
+    id: "fondue",
+    dish: "Fondue",
+    countryId: "switzerland",
+    countryLabel: "Zwitserland",
+    src: "https://loremflickr.com/640/480/cheese,fondue,switzerland",
+    letter: "I"
+  },
+  {
+    id: "goulash",
+    dish: "Goulash",
+    countryId: "hungary",
+    countryLabel: "Hongarije",
+    src: "https://loremflickr.com/640/480/goulash,hungary,stew",
+    letter: "N"
+  }
+];
+
   let p4SolvedCount = 0;
   const p4LettersCollected = [];
 
