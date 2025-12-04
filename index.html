@@ -1308,6 +1308,7 @@ const p2Landmarks = [
       }
       e.dataTransfer.setData("text/plain", id);
       e.dataTransfer.setData("group", group);
+      e.dataTransfer.effectAllowed = "move";
     });
     return chip;
   }
@@ -1315,23 +1316,32 @@ const p2Landmarks = [
   function setupDropTarget(targetEl, expectedId, group, onCorrect) {
     targetEl.dataset.expected = expectedId;
     targetEl.dataset.group = group;
-    targetEl.addEventListener("dragover", e => {
-      const g = e.dataTransfer.getData("group");
-      if (g === group && !targetEl.classList.contains("filled")) {
-        e.preventDefault();
-        targetEl.classList.add("over");
+
+    const handleOverEnter = e => {
+      if (targetEl.classList.contains("filled")) return;
+      e.preventDefault();
+      targetEl.classList.add("over");
+      if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = "move";
       }
-    });
+    };
+
+    targetEl.addEventListener("dragover", handleOverEnter);
+    targetEl.addEventListener("dragenter", handleOverEnter);
+
     targetEl.addEventListener("dragleave", () => {
       targetEl.classList.remove("over");
     });
+
     targetEl.addEventListener("drop", e => {
       e.preventDefault();
       targetEl.classList.remove("over");
       if (targetEl.classList.contains("filled")) return;
+
       const id = e.dataTransfer.getData("text/plain");
       const g = e.dataTransfer.getData("group");
       if (g !== group) return;
+
       const expected = targetEl.dataset.expected;
       const chip = document.querySelector(`.drag-chip[data-id="${id}"][data-group="${group}"]`);
       if (!chip || chip.classList.contains("used")) return;
@@ -1368,7 +1378,7 @@ const p3Dishes = [
   {
     id: "currywurst",
     name: "Currywurst",
-    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Currywurst_-_CurryMitte.jpg",
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/CurryWurst_-_CurryMitte.jpg",
     letter: "C"
   },
   {
@@ -1467,11 +1477,7 @@ const p3Dishes = [
 
       setupDropTarget(target, d.id, "p3", id => {
         const dish = p3Dishes.find(x => x.id === id);
-        if (dish && !p3LettersCollected.includes(dish.letter)) {
-          p3LettersCollected.push(dish.letter);
-        } else if (dish) {
-          p3LettersCollected.push(dish.letter);
-        }
+        if (dish) p3LettersCollected.push(dish.letter);
         p3SolvedCount++;
       });
     });
