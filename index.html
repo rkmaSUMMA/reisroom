@@ -1081,49 +1081,58 @@
   }
 
   function checkPuzzle1() {
-    const feedback = document.getElementById("feedback1");
-    const lettersBox = document.getElementById("p1-letters");
-    lettersBox.textContent = "";
+  const feedback = document.getElementById("feedback1");
+  const lettersBox = document.getElementById("p1-letters");
 
-    const selectedIds = new Set();
-    document.querySelectorAll("#p1-grid input[type=checkbox]").forEach(cb => {
-      if (cb.checked) selectedIds.add(cb.dataset.id);
-    });
+  // Reset
+  lettersBox.textContent = "";
+  feedback.classList.remove("success", "error");
 
-    const correctIds = p1Photos.filter(p => p.isWinterberg).map(p => p.id);
-    const correctSet = new Set(correctIds);
+  const selectedIds = new Set(
+    [...document.querySelectorAll("#p1-grid input[type=checkbox]")]
+      .filter(cb => cb.checked)
+      .map(cb => cb.dataset.id)
+  );
 
-    let ok = true;
+  const correctIds = p1Photos.filter(p => p.isWinterberg).map(p => p.id);
+  const correctSet = new Set(correctIds);
 
-    // Kloppen ALLE vinkjes precies?
-    selectedIds.forEach(id => {
-      if (!correctSet.has(id)) {
-        ok = false;
-      }
-    });
-    correctIds.forEach(id => {
-      if (!selectedIds.has(id)) {
-        ok = false;
-      }
-    });
+  // Verzamel letters van individueel correcte antwoorden
+  const earnedLetters = [];
 
-    if (ok) {
-      feedback.textContent = "✔ Alles goed! Je hebt 8 letters verzameld. Hussel ze tot een grote stad in NRW.";
-      feedback.classList.remove("error");
-      feedback.classList.add("success");
-      const letters = p1Photos.filter(p => p.isWinterberg).map(p => p.letter);
-      shuffleArray(letters).forEach(ch => {
-        const span = document.createElement("span");
-        span.textContent = ch;
-        lettersBox.appendChild(span);
-      });
-      markSolved(1);
-    } else {
-      feedback.textContent = "Nog niet helemaal goed. Je ziet pas letters als alles klopt.";
-      feedback.classList.remove("success");
-      feedback.classList.add("error");
+  p1Photos.forEach(photo => {
+    const shouldBeChecked = photo.isWinterberg;
+    const isChecked = selectedIds.has(photo.id);
+
+    if (shouldBeChecked && isChecked) {
+      // Goed → letter verdienen
+      earnedLetters.push(photo.letter);
     }
+  });
+
+  // Toon de verdiende letters (geshuffeld)
+  shuffleArray(earnedLetters).forEach(ch => {
+    const span = document.createElement("span");
+    span.textContent = ch;
+    lettersBox.appendChild(span);
+  });
+
+  // Check of alles compleet goed is
+  const allCorrect =
+    selectedIds.size === correctSet.size &&
+    [...selectedIds].every(id => correctSet.has(id));
+
+  if (allCorrect) {
+    feedback.textContent =
+      "✔ Perfect! Je hebt alle letters. Vorm de grote stad in NRW.";
+    feedback.classList.add("success");
+    markSolved(1);
+  } else {
+    feedback.textContent =
+      "Je hebt al letters verdiend voor de antwoorden die kloppen. Verbeter je andere keuzes om meer letters te krijgen.";
+    feedback.classList.add("error");
   }
+}
 
   /* Puzzel 2 data – landmarks */
   const p2Landmarks = [
